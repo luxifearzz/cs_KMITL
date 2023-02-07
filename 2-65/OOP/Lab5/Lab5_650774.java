@@ -15,7 +15,7 @@ public class Lab5_650774 {
     static void q1() {
         q1NumberOfEvenElement = arr -> {
             int cnt=0;
-            for(int n : arr) cnt += n%2==0 ? 1 : 0;
+            for(int n : arr) if (n%2==0) cnt++;
             return cnt;
         };
         System.out.println(q1NumberOfEvenElement.calculate(data));
