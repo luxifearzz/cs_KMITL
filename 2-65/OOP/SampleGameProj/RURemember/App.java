@@ -1,3 +1,5 @@
+// this is test project, many of inefficient code
+
 package RURemember;
 
 import java.awt.BorderLayout;
