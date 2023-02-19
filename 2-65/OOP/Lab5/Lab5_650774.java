@@ -38,7 +38,7 @@ public class Lab5_650774 {
     static void oneline() {
         int[] tmp = Arrays.copyOf(data, data.length);
         Arrays.sort(tmp);
-        myMedian = arr -> {return arr[arr.length/2];};
+        myMedian = arr -> arr[arr.length/2];
         System.out.println(myMedian.calculate(tmp)); // 77 ? this output is 48 from line 12
     }
 }
