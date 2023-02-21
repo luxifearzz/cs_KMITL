@@ -1,9 +1,11 @@
 package SelectMatchPicture;
 
 import java.awt.Color;
-import java.awt.GridLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -12,7 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class App {
+public class App implements ActionListener {
     JFrame f;
     JPanel pHint;
     JLabel lHint1;
@@ -40,6 +42,15 @@ public class App {
     JButton bReset;
     JButton bNext;
 
+    boolean g1isEmpty = true;
+    boolean g2isEmpty = true;
+    boolean g3isEmpty = true;
+    boolean g4isEmpty = true;
+
+    boolean isStart = false;
+
+    int score;
+
     // initialize fruits icon
     ImageIcon close = new ImageIcon("SelectMatchPicture/element/close.png");
     ImageIcon empty = new ImageIcon("SelectMatchPicture/element/empty.jpg");
@@ -63,6 +74,28 @@ public class App {
         f.setVisible(true);
     }
 
+    private void start() {
+        lHint1.setIcon(close);
+        lHint2.setIcon(close);
+        lHint3.setIcon(close);
+        lHint4.setIcon(close);
+
+        bGame1.setIcon(empty);
+        bGame2.setIcon(empty);
+        bGame3.setIcon(empty);
+        bGame4.setIcon(empty);
+
+        g1isEmpty = true;
+        g2isEmpty = true;
+        g3isEmpty = true;
+        g4isEmpty = true;
+        
+        isStart = false;
+
+        score = 0;
+        lScore.setText("Your score : " + score);
+    }
+
     private void initialize() {
         initializeHintPanel();
         initializeSelectPanel();
@@ -72,7 +105,7 @@ public class App {
 
     private void initializeTimerPanel() {
         lScore = new JLabel();
-        lScore.setText("Your score : " + 0);
+        lScore.setText("Your score : " + score);
         lScore.setPreferredSize(new Dimension(180, 50));
 
         lTimer = new JLabel();
@@ -80,10 +113,12 @@ public class App {
         lTimer.setPreferredSize(new Dimension(180, 50));
 
         bReset = new JButton();
+        bReset.addActionListener(this);
         bReset.setText("Reset");
         bReset.setPreferredSize(new Dimension(150, 50));
 
         bNext = new JButton();
+        bNext.addActionListener(this);
         bNext.setText("Start");
         bNext.setPreferredSize(new Dimension(150, 50));
 
@@ -102,9 +137,13 @@ public class App {
 
     private void initializeGamePanel() {
         bGame1 = new JButton();
+        bGame1.addActionListener(this);
         bGame2 = new JButton();
+        bGame2.addActionListener(this);
         bGame3 = new JButton();
+        bGame3.addActionListener(this);
         bGame4 = new JButton();
+        bGame4.addActionListener(this);
 
         pGame = new JPanel();
         pGame.setBackground(Color.gray);
@@ -128,14 +167,23 @@ public class App {
 
     private void initializeSelectPanel() {
         bSel1 = new JButton();
+        bSel1.addActionListener(this);
         bSel2 = new JButton();
+        bSel2.addActionListener(this);
         bSel3 = new JButton();
+        bSel3.addActionListener(this);
         bSel4 = new JButton();
+        bSel4.addActionListener(this);
         bSel5 = new JButton();
+        bSel5.addActionListener(this);
         bSel6 = new JButton();
+        bSel6.addActionListener(this);
         bSel7 = new JButton();
+        bSel7.addActionListener(this);
         bSel8 = new JButton();
+        bSel8.addActionListener(this);
         bSel9 = new JButton();
+        bSel9.addActionListener(this);
 
         pSelect = new JPanel();
         pSelect.setBackground(Color.gray);
@@ -201,5 +249,72 @@ public class App {
                 System.out.println(e);
             }
         }
+    }
+
+    public void actionPerformed(ActionEvent ev) {
+        JButton src = (JButton)ev.getSource();
+        if (src == bSel1 || src == bSel2 || src == bSel3 || src == bSel4 || src == bSel5 || src == bSel6 || src == bSel7 || src == bSel8 || src == bSel9) {
+            if (!isStart) return;
+            addToGame(src);
+            bNext.setText("Submit");
+        } else if (src == bGame1 || src == bGame2 || src == bGame3 || src == bGame4) {
+            if (!isStart) return;
+            removeFromGame(src);
+        } else if (src == bReset) {
+            start();
+            bNext.setText("Start");
+            isStart = false;
+        } else if (src == bNext) {
+            if (isStart) {
+                checkAns();
+                bNext.setText("Next");
+                isStart = false;
+            } else {
+                start();
+                bNext.setText("Submit");
+                isStart = true;
+            }
+        }
+    }
+
+    private void removeFromGame(JButton btn) {
+        if (btn == bGame1) g1isEmpty = true;
+        if (btn == bGame2) g2isEmpty = true;
+        if (btn == bGame3) g3isEmpty = true;
+        if (btn == bGame4) g4isEmpty = true;
+        btn.setIcon(empty);
+    }
+
+    private void addToGame(JButton btn) {
+        if (g1isEmpty) {
+            bGame1.setIcon(evalIcon(btn));
+            g1isEmpty = false;
+        } else if (g2isEmpty) {
+            bGame2.setIcon(evalIcon(btn));
+            g2isEmpty = false;
+        } else if (g3isEmpty) {
+            bGame3.setIcon(evalIcon(btn));
+            g3isEmpty = false;
+        } else if (g4isEmpty) {
+            bGame4.setIcon(evalIcon(btn));
+            g4isEmpty = false;
+        }
+    }
+
+    private void checkAns() {
+
+    }
+
+    private ImageIcon evalIcon(JButton btn) {
+        if (btn == bSel1) return f1;
+        if (btn == bSel2) return f2;
+        if (btn == bSel3) return f3;
+        if (btn == bSel4) return f4;
+        if (btn == bSel5) return f5;
+        if (btn == bSel6) return f6;
+        if (btn == bSel7) return f7;
+        if (btn == bSel8) return f8;
+        if (btn == bSel9) return f9;
+        return new ImageIcon();
     }
 }
