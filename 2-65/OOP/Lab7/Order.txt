@@ -1,0 +1,16 @@
+1. newCustomerArrives() -> Shop
+2. add(Product product, int price) -> Catalog
+3. calculateAmount() -> LineItem
+4. getProduct(String productName) -> Catalog
+5. getPrice(String productName) -> Catalog
+6. generateLineItem(String pName, int q) -> Shop
+7. putInBasket(LineItem item) -> Basket
+8. generateBuyNowItem(String pName) -> Shop
+9. buyNow(LineItem item) -> Basket
+10. getPayment(Basket b) -> Shop
+11. showCatalog() -> Catalog
+12. showCatalog() -> Shop
+13. getBuyPrice() -> LineItem
+14. showItemsInBasket() -> Basket
+15. printInvoice() -> Basket
+16. dailySalesReport() -> Shop
