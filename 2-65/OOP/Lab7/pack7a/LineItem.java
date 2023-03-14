@@ -23,7 +23,7 @@ public class LineItem {
         return buyPrice;
     }
 
-    public int calculateAmount() {  // 3
+    public int calculateAmount() {  // 2
         return quantity * buyPrice;
     }
 

@@ -12,14 +12,14 @@ public class Catalog {
         priceList = new HashMap<>();
     }
 
-    public void add(Product product, int price) {   // 2
+    public void add(Product product, int price) {   // 3
         productList.putIfAbsent(product.getpName(), product);
         priceList.putIfAbsent(product.getpName(), price);
     }
 
-    public void showCatalog() { // 11
-        for(var pd:productList.keySet()) {
-            System.out.println(pd + " @ " + priceList.get(pd));
+    public void showCatalog() { // 6
+        for(var pd:priceList.entrySet()) {
+            System.out.println(pd.getKey() + " @ " + pd.getValue());
         }
     }
 

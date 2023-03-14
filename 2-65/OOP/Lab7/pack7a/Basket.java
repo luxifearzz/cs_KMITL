@@ -12,7 +12,7 @@ public class Basket {
         }
     }
 
-    public void putInBasket(LineItem item) {    // 7
+    public void putInBasket(LineItem item) {    // 9
         items.add(item);
     }
 
@@ -27,7 +27,7 @@ public class Basket {
         return sum;
     }
 
-    public void buyNow(LineItem item) { // 9
+    public void buyNow(LineItem item) { // 11
         ArrayList<LineItem> tmpItems = new ArrayList<>(items);
         items = new ArrayList<>();
         items.add(item);

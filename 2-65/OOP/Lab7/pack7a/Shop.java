@@ -18,7 +18,7 @@ public class Shop {
         showCatalog();
     }
 
-    private void showCatalog() {    // 12
+    private void showCatalog() {    // 7
         System.out.println("Welcome to " + name);
         catalog.showCatalog();
     }
@@ -27,12 +27,12 @@ public class Shop {
         return new Basket();
     }
 
-    public LineItem generateLineItem(String pName, int q) { // 6 : add to UML
+    public LineItem generateLineItem(String pName, int q) { // 8 : add to UML
         LineItem tmpLineItem = new LineItem(catalog.getProduct(pName), q, catalog.getPrice(pName));
         return tmpLineItem;
     }
 
-    public LineItem generateBuyNowItem(String pName) {  // 8
+    public LineItem generateBuyNowItem(String pName) {  // 10
         LineItem tmpLineItem = new LineItem(catalog.getProduct(pName), 1, catalog.getPrice(pName));
         Basket tmpBasket = new Basket();
         tmpBasket.putInBasket(tmpLineItem);
@@ -40,7 +40,7 @@ public class Shop {
         return tmpLineItem;
     }
 
-    public void getPayment(Basket b) {  // 10
+    public void getPayment(Basket b) {  // 12
         System.out.println("I am cashier");
         b.printInvoice();
         ordersToday.add(b);
